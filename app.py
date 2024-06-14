@@ -7,9 +7,15 @@ import io
 
 app = Flask(__name__)
 
-# Load your entire model (architecture + weights)
+url = "https://drive.google.com/uc?id=1VaMb2oy8zYOsa7aq1x6MzxjOpPANHZk5"
+output = 'model.h5'  # مسار الحفظ المحلي
 
-model = load_model('model.h5')
+# تنزيل الملف من Google Drive
+gdown.download(url, output, quiet=False)
+
+# تحميل النموذج باستخدام TensorFlow/Keras
+model = load_model(output)
+
 
 # Define a function to preprocess input images
 def preprocess_image(image, target_size):
